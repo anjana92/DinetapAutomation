@@ -19,6 +19,18 @@ public class SplashScreenTest extends BaseTest {
 
         Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
         System.out.println("✅ Splash screen text verified successfully...");
+    }
 
+    @Test
+    public void verifySplashTextAgain() {
+        SplashScreenPage splash = new SplashScreenPage(driver);
+        String actualText = splash.getSplashText();
+        String expectedText = ExcelUtils.getExpectedText("splashText"+"123");
+
+        System.out.println("🔍 Actual UI text: " + actualText);
+        System.out.println("📖 Expected from Excel: " + expectedText);
+
+        Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
+        System.out.println("✅ Splash screen text verified successfully... (duplicate run)");
     }
 }

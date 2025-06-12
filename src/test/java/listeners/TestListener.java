@@ -1,11 +1,15 @@
 package listeners;
 
+import base.BaseTest;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utils.ExtentManager;
+
+import java.io.IOException;
 
 public class TestListener implements ITestListener {
     private static ExtentReports extent = ExtentManager.getInstance();
@@ -18,17 +22,22 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.get().pass("Test Passed");
+        test.get().pass("✅ Test Passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test.get().fail(result.getThrowable());
+        Object currentClass = result.getInstance();
+        String testName = result.getMethod().getMethodName();
+        String screenshotPath = ((BaseTest) currentClass).captureScreenshot(testName);
+
+        test.get().fail(result.getThrowable(),
+                MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test.get().skip("Test Skipped");
+        test.get().skip("⚠️ Test Skipped");
     }
 
     @Override
@@ -36,4 +45,3 @@ public class TestListener implements ITestListener {
         extent.flush();
     }
 }
-
