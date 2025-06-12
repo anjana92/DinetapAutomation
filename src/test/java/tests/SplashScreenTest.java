@@ -19,6 +19,6 @@ public class SplashScreenTest extends BaseTest {
 
         Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
         System.out.println("✅ Splash screen text verified successfully...");
-        System.out.println("✅ Splash screen text verified successfully...");
+
     }
 }
