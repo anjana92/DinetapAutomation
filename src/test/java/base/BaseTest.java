@@ -7,7 +7,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +17,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BaseTest {
-    protected AppiumDriver driver;
+    protected static AppiumDriver driver;
 
-    @BeforeClass
+    @BeforeSuite
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
@@ -31,9 +33,10 @@ public class BaseTest {
 
         URL appiumServerUrl = new URL("http://127.0.0.1:4723/wd/hub");
         driver = new AndroidDriver(appiumServerUrl, caps);
+
     }
 
-    @AfterClass
+    @AfterSuite
     public void tearDown() {
         if (driver != null) {
             driver.quit();
@@ -62,6 +65,10 @@ public class BaseTest {
         return "screenshots/" + fileName;
     }
 
+
+    public static AppiumDriver getDriver() {
+        return driver;
+    }
 
 
 

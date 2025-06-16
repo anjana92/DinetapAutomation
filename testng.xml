@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Dinetap Local Automation Suite">
+<suite name="Dinetap Local Automation Suite" parallel="false">
 
-    <test name="Splash Screen Test">
+    <test name="Splash and Home Test Flow">
         <classes>
             <class name="tests.SplashScreenTest"/>
+            <class name="tests.HomePageTest"/>
+            <class name="tests.HowAppWorksPopupTest"/>
         </classes>
     </test>
-
 
     <listeners>
         <listener class-name="listeners.TestListener"/>
     </listeners>
-
-
-
-
-
-
-
 
 </suite>
