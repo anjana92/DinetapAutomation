@@ -34,7 +34,7 @@ public class SplashScreenTest extends BaseTest {
         System.out.println("✅ Splash screen text verified successfully... (duplicate run)");
     }
 
-    @Test
+    /*@Test
     public void verifySplashTextAgain2() {
         SplashScreenPage splash = new SplashScreenPage(driver);
         String actualText = splash.getSplashText();
@@ -60,7 +60,7 @@ public class SplashScreenTest extends BaseTest {
 
         Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
         System.out.println("✅ Splash screen text verified successfully...");
-    }
+    }*/
 
 
 }

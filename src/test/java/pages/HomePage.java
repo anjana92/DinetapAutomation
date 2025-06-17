@@ -83,6 +83,16 @@ public class HomePage {
 
 
 
+
+    public boolean isLetsGoBannerVisible() {
+        try {
+            return driver.findElement(letsGoBanner).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
     private void dumpPageSource() {
         try {
             String source = driver.getPageSource();
