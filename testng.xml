@@ -7,6 +7,7 @@
             <class name="tests.SplashScreenTest"/>
             <class name="tests.HomePageTest"/>
             <class name="tests.HowAppWorksPopupTest"/>
+            <class name="tests.LocationNavigationTest"/>
         </classes>
     </test>
 

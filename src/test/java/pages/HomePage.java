@@ -93,6 +93,12 @@ public class HomePage {
     }
 
 
+
+    public void clickShortLocation() {
+        driver.findElement(shortLocation).click();
+    }
+
+
     private void dumpPageSource() {
         try {
             String source = driver.getPageSource();
