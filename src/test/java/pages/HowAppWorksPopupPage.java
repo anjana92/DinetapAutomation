@@ -228,7 +228,7 @@ public class HowAppWorksPopupPage {
     public void scrollOnStepByStep() {
         int startX = 406;
         int startY = 869;
-        int endX = (int) (startX * 0.3);
+        int endX = (int) (startX * 0.4);
         int endY = startY;
 
         new TouchAction((PerformsTouchActions) driver)
