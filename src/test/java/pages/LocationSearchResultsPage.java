@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -14,13 +15,16 @@ public class LocationSearchResultsPage {
 
     private AppiumDriver driver;
 
+    private WebDriverWait wait;
     // Locators
     private final By searchBox = By.xpath("//android.widget.EditText");
     private final By mallsSection = By.xpath("//android.widget.TextView[@text='Malls']");
     private final By addressesSection = By.xpath("//android.widget.TextView[@text='Addresses']");
     private final By filteredResult = By.xpath("//android.widget.TextView[@text='Bayfront Avenue, Marina Bay Sands Hotel Tower 1, Singapore']");
     private final By noResultsText = By.xpath("//android.widget.TextView[@text='No results found']");
+    private By cancelButton = By.xpath("//android.widget.TextView[@text='Cancel']");
 
+    
     /*private final By mallResults = By.xpath(
             "//android.widget.TextView[@text='Malls']/following-sibling::android.view.ViewGroup//android.widget.TextView[not(@text='Malls') and not(@text='Addresses')]"
     );
@@ -42,6 +46,7 @@ public class LocationSearchResultsPage {
 
     public LocationSearchResultsPage(AppiumDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public void enterSearchTerm(String term) {
@@ -82,8 +87,6 @@ public class LocationSearchResultsPage {
 
 
 
-
-
     public boolean isNoResultsFoundTextVisible() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -95,6 +98,33 @@ public class LocationSearchResultsPage {
             return false;
         }
     }
+
+    public String getCancelButtonText() {
+        //Instant wait;
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(cancelButton));
+        return element.getText();
+    }
+
+    public void clickCancelButton() {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(cancelButton));
+        element.click();
+    }
+
+    public void clickFilteredLocationByExactText(String addressText) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//android.widget.TextView[@text='" + addressText + "']")));
+        element.click();
+    }
+
+    public void enterSearchTermUsingPlaceholder(String term) {
+        WebElement searchBoxElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(searchBox)
+        );
+        searchBoxElement.clear();
+        searchBoxElement.sendKeys(term);
+    }
+
+
 
 
 }

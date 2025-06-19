@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.LocationSearchResultsPage;
 import utils.ExcelUtils;
 
@@ -132,4 +133,80 @@ public class LocationSearchResultsTest extends BaseTest {
     }
 
 
+
+    @Test(dependsOnMethods ="verifyNoResultsFoundForNonExistingTerm")
+    public void verifyCancelButtonText() {
+        LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
+
+        // Get the actual Cancel button text
+        String actualCancelText = locationPage.getCancelButtonText();
+
+        // Get expected text from Excel (sheet should have a key like CancelButtonText)
+        String expectedCancelText = ExcelUtils.getExpectedText("CancelButtonText");
+
+        System.out.println("Actual Cancel Button Text: " + actualCancelText);
+        System.out.println("Expected Cancel Button Text: " + expectedCancelText);
+
+        Assert.assertEquals(actualCancelText, expectedCancelText, "Cancel button text mismatch!");
+    }
+
+    @Test(dependsOnMethods = "verifyCancelButtonText")
+    public void verifyCancelNavigationToHomePage() {
+        LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        // Click the Cancel button
+        locationPage.clickCancelButton();
+
+        // Verify HomePage loaded (check for "Your Wallets" text)
+        String actualWalletText = homePage.getYourWalletsText();
+        String expectedWalletText = ExcelUtils.getExpectedText("YourWallets");
+
+        System.out.println("Actual Your Wallets Text: " + actualWalletText);
+        System.out.println("Expected Your Wallets Text: " + expectedWalletText);
+
+        Assert.assertEquals(actualWalletText, expectedWalletText, "Navigation to Home Page failed!");
+    }
+
+
+    @Test(dependsOnMethods =  "verifyCancelNavigationToHomePage")
+    public void verifyFilteredLocationNavigatesToHomePage() {
+        HomePage homePage = new HomePage(driver);
+        LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
+
+        // Step 1: Click on short location to open search
+        homePage.clickShortLocation();
+
+        // Step 2: Get search term from Excel
+        String searchTerm = ExcelUtils.getExpectedText("UniqueSearchAddress");
+
+        // Step 3: Enter search term in search box using the correct xpath
+        locationPage.enterSearchTermUsingPlaceholder(searchTerm);
+
+        // Step 4: Click on filtered location (exact text match)
+        locationPage.clickFilteredLocationByExactText(searchTerm);
+
+        // Step 5: Verify Home Page loaded (Your Wallets visible)
+        String actualWalletText = homePage.getYourWalletsText();
+        String expectedWalletText = ExcelUtils.getExpectedText("YourWallets");
+        System.out.println("✅ Actual Your Wallets text: " + actualWalletText);
+        Assert.assertEquals(actualWalletText, expectedWalletText, "User did not navigate to Home Page!");
+    }
+
+    @Test(dependsOnMethods = "verifyFilteredLocationNavigatesToHomePage")
+    public void verifySelectedAddressDisplayedOnTopBar() {
+        HomePage homePage = new HomePage(driver);
+
+        // Get expected address from Excel
+        String expectedAddress = ExcelUtils.getExpectedText("UniqueSearchAddress");
+
+        // Verify top bar address
+        String actualTopBarAddress = homePage.getTopBarAddressByExactText(expectedAddress);
+        System.out.println("✅ Actual Top Bar Address: " + actualTopBarAddress);
+        Assert.assertEquals(actualTopBarAddress, expectedAddress, "Top bar address does not match selected address!");
+    }
 }
+
+
+
+

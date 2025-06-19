@@ -107,4 +107,13 @@ public class HomePage {
             // Handle safely
         }
     }
+
+    public String getTopBarAddressByExactText(String addressText) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//android.widget.TextView[@text='" + addressText + "']")));
+        return element.getText();
+    }
+
+
+
 }

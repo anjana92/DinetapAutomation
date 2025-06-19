@@ -36,13 +36,13 @@ public class BaseTest {
 
     }
 
-    @AfterSuite
+    /*@AfterSuite
     public void tearDown() {
         if (driver != null) {
             driver.quit();
             System.out.println("🔚 Driver session ended.");
         }
-    }
+    }*/
 
 
 
