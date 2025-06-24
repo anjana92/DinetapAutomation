@@ -205,6 +205,43 @@ public class LocationSearchResultsTest extends BaseTest {
         System.out.println("✅ Actual Top Bar Address: " + actualTopBarAddress);
         Assert.assertEquals(actualTopBarAddress, expectedAddress, "Top bar address does not match selected address!");
     }
+
+
+    @Test(dependsOnMethods = "verifySelectedAddressDisplayedOnTopBar")
+    public void resetToDefaultAddressAndVerify() {
+        HomePage homePage = new HomePage(driver);
+        LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
+
+        // Step 1: Click on short location to open the search
+        homePage.clickShortLocation2();
+
+        // Step 2: Get default address (FullLocation) from Excel
+        String defaultAddress = ExcelUtils.getExpectedText("FullLocation");
+        Assert.assertNotNull(defaultAddress, "❌ Default address (FullLocation) missing in Excel!");
+
+        // Step 3: Enter default address in search box
+        locationPage.enterSearchTermUsingPlaceholder(defaultAddress);
+
+        // Step 4: Click on filtered location that matches default address
+        locationPage.clickFilteredLocationByExactText(defaultAddress);
+
+        // Step 5: Verify Home Page loaded (Your Wallets visible)
+        String actualWalletText = homePage.getYourWalletsText();
+        String expectedWalletText = ExcelUtils.getExpectedText("YourWallets");
+        System.out.println("✅ Actual Your Wallets text after resetting: " + actualWalletText);
+        Assert.assertEquals(actualWalletText, expectedWalletText, "User did not navigate to Home Page after resetting!");
+
+        // Step 6: Verify top bar address is the default address
+        String actualTopBarAddress = homePage.getTopBarAddressByExactText(defaultAddress);
+        System.out.println("✅ Actual Top Bar Address after resetting: " + actualTopBarAddress);
+        Assert.assertEquals(actualTopBarAddress, defaultAddress, "Top bar address does not match default address!");
+    }
+
+
+
+
+
+
 }
 
 

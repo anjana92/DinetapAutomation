@@ -18,7 +18,7 @@ public class HomePage {
     private By yourWallets = By.xpath("//android.widget.TextView[@text='Your Wallets']");
     private By howAppWorksBanner = By.xpath("//*[contains(@text,'Click! Learn how the app works')]");
     private By letsGoBanner = By.xpath("//*[contains(@text, \"Let's Go\")]");
-
+    private By shortLocation2 = By.xpath("//android.widget.TextView[contains(@text, 'Nike Unite Store')]");
 
     public HomePage(AppiumDriver driver) {
         this.driver = driver;
@@ -96,6 +96,10 @@ public class HomePage {
 
     public void clickShortLocation() {
         driver.findElement(shortLocation).click();
+    }
+
+    public void clickShortLocation2() {
+        driver.findElement(shortLocation2).click();
     }
 
 
