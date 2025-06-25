@@ -33,4 +33,25 @@ public class ExcelUtils {
     }
 
 
+
+    public class PerformanceUtils {
+
+        public static long getStartTime() {
+            return System.currentTimeMillis();
+        }
+
+        public static long getEndTime(long startTime) {
+            return System.currentTimeMillis() - startTime;
+        }
+
+        public static void logLoadTime(String screenName, long durationMillis) {
+            System.out.println("⏱️ " + screenName + " loaded in: " + durationMillis + " ms");
+        }
+
+        public static void logSegment(String message, long duration) {
+            System.out.println("⏱️ " + message + ": " + duration + " ms");
+        }
+
+    }
+
 }

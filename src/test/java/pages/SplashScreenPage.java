@@ -12,7 +12,7 @@ public class SplashScreenPage {
     private AppiumDriver driver;
 
     private By splashElement = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']");
-    private Object Duration;
+    private final By homePageIdentifier = By.xpath("//android.widget.TextView[@text='Your Wallets']");
 
     public SplashScreenPage(AppiumDriver driver) {
         this.driver = driver;
@@ -26,7 +26,10 @@ public class SplashScreenPage {
 
 
 
-
+    public void waitForHomePageAfterSplash() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(homePageIdentifier));
+    }
 
 
 

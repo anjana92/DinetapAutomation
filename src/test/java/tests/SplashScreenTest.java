@@ -34,33 +34,22 @@ public class SplashScreenTest extends BaseTest {
         System.out.println("✅ Splash screen text verified successfully... (duplicate run)");
     }
 
-    /*@Test
-    public void verifySplashTextAgain2() {
+
+    @Test
+    public void measureSplashToHomeLoadTime() {
         SplashScreenPage splash = new SplashScreenPage(driver);
-        String actualText = splash.getSplashText();
-        String expectedText = ExcelUtils.getExpectedText("splashText");
 
-        System.out.println("🔍 Actual UI text: " + actualText);
-        System.out.println("📖 Expected from Excel: " + expectedText);
+        long startTime = ExcelUtils.PerformanceUtils.getStartTime();
 
-        Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
-        System.out.println("✅ Splash screen text verified successfully...");
+        splash.waitForHomePageAfterSplash(); // Waits until "Your Wallets" is visible
+
+        long duration = ExcelUtils.PerformanceUtils.getEndTime(startTime);
+        ExcelUtils.PerformanceUtils.logLoadTime("Splash ➜ Home", duration);
+
+        System.out.println("✅ Splash to Home transition verified...");
     }
 
 
-
-    @Test
-    public void verifySplashTextAgain3() {
-        SplashScreenPage splash = new SplashScreenPage(driver);
-        String actualText = splash.getSplashText();
-        String expectedText = ExcelUtils.getExpectedText("splashText");
-
-        System.out.println("🔍 Actual UI text: " + actualText);
-        System.out.println("📖 Expected from Excel: " + expectedText);
-
-        Assert.assertEquals(actualText.trim(), expectedText.trim(), "Splash text does not match!");
-        System.out.println("✅ Splash screen text verified successfully...");
-    }*/
 
 
 }
