@@ -9,6 +9,7 @@
             <class name="tests.HowAppWorksPopupTest"/>
             <class name="tests.LocationNavigationTest"/>
             <class name="tests.LocationSearchResultsTest"/>
+            <class name="tests.YourProfilePageTest"/>
 
         </classes>
     </test>

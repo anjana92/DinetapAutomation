@@ -19,6 +19,8 @@ public class HomePage {
     private By howAppWorksBanner = By.xpath("//*[contains(@text,'Click! Learn how the app works')]");
     private By letsGoBanner = By.xpath("//*[contains(@text, \"Let's Go\")]");
     private By shortLocation2 = By.xpath("//android.widget.TextView[contains(@text, 'Nike Unite Store')]");
+    private final By profileIcon = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[5]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ImageView");
+
 
     public HomePage(AppiumDriver driver) {
         this.driver = driver;
@@ -120,4 +122,12 @@ public class HomePage {
 
 
 
+    public void clickProfileIcon() {
+        driver.findElement(profileIcon).click();
+        try {
+            Thread.sleep(2000); // TEMPORARY for visual transition; better to use explicit wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
