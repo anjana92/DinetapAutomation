@@ -100,4 +100,127 @@ public class YourProfilePageTest extends BaseTest {
         Assert.assertTrue(isClosed, "Popup did not close after tapping close icon!");
     }
 
+    @Test(dependsOnMethods = "verifyAppearancePopupClosesOnCloseTap")
+    public void verifyLanguageTextWithExcelData() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        Assert.assertTrue(profilePage.verifyLanguageTextFromExcel(), "'Language' text does not match expected value from Excel.");
+    }
+
+
+    @Test(dependsOnMethods = "verifyLanguageTextWithExcelData")
+    public void verifyChangeLanguagePopupAppearsCorrectly() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+
+        // Step 1: Tap the Language option
+        profilePage.tapLanguageOption();
+
+        // Step 2: Assert popup title using Excel-driven value
+        Assert.assertTrue(profilePage.isChangeLanguagePopupOpenedCorrectly(),
+                "'Change Language' popup did not appear correctly or title mismatched.");
+    }
+
+
+    @Test(dependsOnMethods = "verifyChangeLanguagePopupAppearsCorrectly")
+    public void verifyEnglishUSTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("LanguageOptionEnglishUS");
+        String actual = profilePage.getEnglishUSText();
+        Assert.assertEquals(actual, expected, "Mismatch for English (US)");
+    }
+
+    @Test(dependsOnMethods = "verifyChangeLanguagePopupAppearsCorrectly")
+    public void verifyEnglishUKTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("LanguageOptionEnglishUK");
+        String actual = profilePage.getEnglishUKText();
+        Assert.assertEquals(actual, expected, "Mismatch for English (UK)");
+    }
+
+    @Test(dependsOnMethods = "verifyChangeLanguagePopupAppearsCorrectly")
+    public void verifyEnglishAUTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("LanguageOptionEnglishAU");
+        String actual = profilePage.getEnglishAUText();
+        Assert.assertEquals(actual, expected, "Mismatch for English (AU)");
+    }
+
+    @Test(dependsOnMethods = "verifyChangeLanguagePopupAppearsCorrectly")
+    public void verifyFrenchTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("LanguageOptionFrench");
+        String actual = profilePage.getFrenchText();
+        Assert.assertEquals(actual, expected, "Mismatch for Le français");
+    }
+
+
+    @Test(dependsOnMethods = "verifyFrenchTextMatchesExcel")
+    public void verifyLanguagePopupClosesOnCloseTap() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+
+        profilePage.closeLanguagePopup();
+
+        Assert.assertTrue(profilePage.isLanguagePopupClosed(), "Change Language popup did not close after tapping close icon.");
+    }
+
+    @Test(dependsOnMethods = "verifyLanguagePopupClosesOnCloseTap")
+    public void verifyPopupClosesOnOutsideClickUsingYourProfile() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+
+        // Step 1: Tap Language to open popup
+        profilePage.tapLanguageOption();
+        Assert.assertTrue(profilePage.isChangeLanguagePopupOpenedCorrectly(),
+                "Popup did not open before tapping outside.");
+
+        // Step 2: Tap outside (on Your Profile title)
+        profilePage.tapOutsidePopupUsingProfileTitle();
+
+        // Step 3: Verify popup closed
+        Assert.assertTrue(profilePage.isLanguagePopupClosed(),
+                "Popup did not close after tapping on 'Your Profile' outside the popup.");
+    }
+
+    @Test(dependsOnMethods = "verifyPopupClosesOnOutsideClickUsingYourProfile")
+    public void verifyHelpSupportTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("ProfileHelpLabel");
+        String actual = profilePage.getHelpSupportText();
+        Assert.assertEquals(actual, expected, "Mismatch in 'Help & Support' text.");
+    }
+
+    @Test(dependsOnMethods = "verifyPopupClosesOnOutsideClickUsingYourProfile")
+    public void verifyTermsPrivacyTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("ProfileTermsLabel");
+        String actual = profilePage.getTermsPrivacyText();
+        Assert.assertEquals(actual, expected, "Mismatch in 'Terms & Privacy' text.");
+    }
+
+    @Test(dependsOnMethods = "verifyPopupClosesOnOutsideClickUsingYourProfile")
+    public void verifySendFeedbackTextMatchesExcel() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        String expected = ExcelUtils.getExpectedText("ProfileSendFeedbackLabel");
+        String actual = profilePage.getSendFeedbackText();
+        Assert.assertEquals(actual, expected, "Mismatch in 'Send Feedback' text.");
+    }
+
+    @Test(dependsOnMethods = "verifySendFeedbackTextMatchesExcel")
+    public void verifyFeedbackPopupOpensCorrectly() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+
+        // Step 1: Tap on 'Send Feedback'
+        profilePage.tapSendFeedback();
+
+        // Step 2: Get actual title from UI
+        String actual = profilePage.getFeedbackPopupTitleText();
+
+        // Step 3: Get expected text from Excel
+        String expected = ExcelUtils.getExpectedText("FeedbackPopupTitle");
+
+        // Step 4: Assert
+        Assert.assertEquals(actual, expected, "'Tell us about it!' popup title mismatch.");
+    }
+
+
+
+
 }
