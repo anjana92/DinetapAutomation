@@ -6,6 +6,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,44 +20,59 @@ public class HowAppWorksPopupPage {
     // Step 1 locators
     private final By step1Title = By.xpath("//android.widget.TextView[@text='Step 1']");
     private final By step1DescriptionTitle = By.xpath("//android.widget.TextView[@text='Find an offer']");
-    private final By step1DescriptionDetail = By.xpath("//android.widget.TextView[@text='Upto 40% credits up for grabs! Keep a lookout!']");
-    private final By step1Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[4]");
+    //private final By step1DescriptionDetail = By.xpath("//android.widget.TextView[@text='Upto 40% credits up for grabs! Keep a lookout!']");
+    //private final By step1Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[4]");
+    private final By step1DescriptionDetail = By.xpath("//android.widget.TextView[contains(@text, 'credits up for grabs')]");
+    private final By step1Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[4]");
+
 
     // Step 2 locators
     private final By step2Title = By.xpath("//android.widget.TextView[@text='Step 2']");
     private final By step2DescriptionTitle = By.xpath("//android.widget.TextView[@text='Prepay']");
     private final By step2DescriptionDetail = By.xpath("//android.widget.TextView[@text='Enter any amount and complete payments to get extra credits']");
-    private final By step2Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[5]");
+    //private final By step2Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[5]");
+    private final By step2Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[5]");
 
     // Step 3 locators
     private final By step3Title = By.xpath("//android.widget.TextView[@text='Step 3']");
     private final By step3DescriptionTitle = By.xpath("//android.widget.TextView[@text='Short Wait']");
     private final By step3DescriptionDetail = By.xpath("//android.widget.TextView[@text='Each restaurant has a short waiting period before your credits become active']");
-    private final By step3Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[6]");
+    //private final By step3Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[6]");
+    private final By step3Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[6]");
 
 
     // Step 4 locators
     private final By step4Title = By.xpath("//android.widget.TextView[@text='Step 4']");
     private final By step4DescriptionTitle = By.xpath("//android.widget.TextView[@text='Check your wallet']");
     private final By step4DescriptionDetail = By.xpath("//android.widget.TextView[@text='Open your wallet to confirm your funds are there and ready to use']");
-    private final By step4Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[7]");
+    //private final By step4Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[7]");
+    private final By step4Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[7]");
 
     // Step 5 locators
     private final By step5Title = By.xpath("//android.widget.TextView[@text='Step 5']");
     private final By step5DescriptionTitle = By.xpath("//android.widget.TextView[@text='Pay your bill']");
     private final By step5DescriptionDetail = By.xpath("//android.widget.TextView[@text='Open the restaurant wallet and click on pay bill, choose amount to pay and complete']");
-    private final By step5Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[8]");
+    //private final By step5Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[8]");
+    private final By step5Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[8]");
 
     // Step 6 locators
     private final By step6Title = By.xpath("//android.widget.TextView[@text='Step 6']");
     //private final By step6DescriptionTitle = By.xpath("//android.widget.TextView[@text='That's it!']");
     private final By step6DescriptionTitle = By.xpath("//android.widget.TextView[@text=\"That's it!\"]");
 
-    private final By step6DescriptionDetail = By.xpath("//android.widget.TextView[@text='Happy saving on your meals at your favourite spot']");
-    private final By step6Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[9]");
+    private final By step6DescriptionDetail = By.xpath("//android.widget.TextView[@text='Happy saving on your meals!']");
+    //private final By step6Dot = By.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[9]");
+    private final By step6Dot = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[9]");
 
     //Close icon locator
-    private final By closeIcon = By.xpath("//android.view.ViewGroup[@resource-id=\"tray.learnMoreTray.closeBtnId\"]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    //private final By closeIcon = By.xpath("//android.view.ViewGroup[@resource-id=\"tray.learnMoreTray.closeBtnId\"]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    private final By closeIcon = By.xpath(
+            "//android.widget.FrameLayout[@resource-id='android:id/content']" +
+                    "/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]" +
+                    "/com.horcrux.svg.SvgView"
+    );
 
 
 
@@ -91,6 +107,15 @@ public class HowAppWorksPopupPage {
     public String getStep1DescriptionDetailText() {
         return driver.findElement(step1DescriptionDetail).getText();
     }
+
+//    // Method to get the text from the locator
+//    public String getStep1DescriptionDetailText() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(step1DescriptionDetail));
+//        return element.getText();
+//    }
+
+
 
     public boolean isStep1DotVisible() {
         return isElementVisible(step1Dot);

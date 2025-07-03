@@ -14,6 +14,17 @@ public class LocationNavigationTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
         LocationPage locationPage = new LocationPage(driver);
 
+        // Wait briefly to allow location popup to appear
+        try {
+            Thread.sleep(2000); // Wait 2 seconds (adjust if needed)
+            System.out.println("📌 Tapping top of screen to dismiss location popup...");
+            new HomePage(driver).tapTopOfScreen(); // Tap to dismiss popup
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
         // Click short location
         homePage.clickShortLocation();
         System.out.println("👉 Clicked on short location.");
@@ -24,7 +35,7 @@ public class LocationNavigationTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        homePage.tapTopOfScreen();
         // Verify search placeholder
         String expectedPlaceholder = ExcelUtils.getExpectedText("LocationSearchPlaceholder");
         String actualPlaceholder = locationPage.getSearchPlaceholderText();

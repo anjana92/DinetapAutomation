@@ -212,6 +212,7 @@ public class YourProfilePageTest extends BaseTest {
 
         // Step 2: Get actual title from UI
         String actual = profilePage.getFeedbackPopupTitleText();
+        System.out.println(actual);
 
         // Step 3: Get expected text from Excel
         String expected = ExcelUtils.getExpectedText("FeedbackPopupTitle");
@@ -221,6 +222,14 @@ public class YourProfilePageTest extends BaseTest {
     }
 
 
+    @Test(dependsOnMethods = "verifyFeedbackPopupOpensCorrectly")
+    public void verifyFeedbackPopupCloseIconClick() {
+        YourProfilePage profilePage = new YourProfilePage(driver);
+        profilePage.clickFeedbackPopupCloseIcon();
+
+        Assert.assertTrue(profilePage.isPopupClosed(), "❌ Feedback popup was not closed!");
+        System.out.println("✅ Feedback popup closed.");
+    }
 
 
 }

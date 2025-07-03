@@ -137,6 +137,7 @@ public class LocationSearchResultsTest extends BaseTest {
     @Test(dependsOnMethods ="verifyNoResultsFoundForNonExistingTerm")
     public void verifyCancelButtonText() {
         LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
+        HomePage homePage = new HomePage(driver);
 
         // Get the actual Cancel button text
         String actualCancelText = locationPage.getCancelButtonText();
@@ -147,16 +148,27 @@ public class LocationSearchResultsTest extends BaseTest {
         System.out.println("Actual Cancel Button Text: " + actualCancelText);
         System.out.println("Expected Cancel Button Text: " + expectedCancelText);
 
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
+
         Assert.assertEquals(actualCancelText, expectedCancelText, "Cancel button text mismatch!");
     }
 
     @Test(dependsOnMethods = "verifyCancelButtonText")
-    public void verifyCancelNavigationToHomePage() {
+    public void verifyCancelNavigationToHomePage() throws InterruptedException {
         LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
         HomePage homePage = new HomePage(driver);
 
         // Click the Cancel button
         locationPage.clickCancelButton();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
 
         // Verify HomePage loaded (check for "Your Wallets" text)
         String actualWalletText = homePage.getYourWalletsText();
@@ -174,8 +186,13 @@ public class LocationSearchResultsTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
         LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
 
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
+
         // Step 1: Click on short location to open search
         homePage.clickShortLocation();
+
+
 
         // Step 2: Get search term from Excel
         String searchTerm = ExcelUtils.getExpectedText("UniqueSearchAddress");
@@ -185,6 +202,7 @@ public class LocationSearchResultsTest extends BaseTest {
 
         // Step 4: Click on filtered location (exact text match)
         locationPage.clickFilteredLocationByExactText(searchTerm);
+
 
         // Step 5: Verify Home Page loaded (Your Wallets visible)
         String actualWalletText = homePage.getYourWalletsText();
@@ -196,6 +214,9 @@ public class LocationSearchResultsTest extends BaseTest {
     @Test(dependsOnMethods = "verifyFilteredLocationNavigatesToHomePage")
     public void verifySelectedAddressDisplayedOnTopBar() {
         HomePage homePage = new HomePage(driver);
+
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
 
         // Get expected address from Excel
         String expectedAddress = ExcelUtils.getExpectedText("UniqueSearchAddress");
@@ -212,8 +233,13 @@ public class LocationSearchResultsTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
         LocationSearchResultsPage locationPage = new LocationSearchResultsPage(driver);
 
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
+
         // Step 1: Click on short location to open the search
         homePage.clickShortLocation2();
+
+
 
         // Step 2: Get default address (FullLocation) from Excel
         String defaultAddress = ExcelUtils.getExpectedText("FullLocation");
@@ -224,6 +250,9 @@ public class LocationSearchResultsTest extends BaseTest {
 
         // Step 4: Click on filtered location that matches default address
         locationPage.clickFilteredLocationByExactText(defaultAddress);
+
+        //this is just to remove the location permission pop up appearance
+        homePage.tapTopOfScreen();
 
         // Step 5: Verify Home Page loaded (Your Wallets visible)
         String actualWalletText = homePage.getYourWalletsText();

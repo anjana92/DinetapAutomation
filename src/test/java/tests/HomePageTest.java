@@ -9,7 +9,41 @@ import utils.ExcelUtils;
 
 public class HomePageTest extends BaseTest {
 
+
     @Test
+    public void verifyAndHandleLocationPermissionPopup() {
+        HomePage homePage = new HomePage(driver);
+
+        try {
+            Thread.sleep(2000); // Give time for popup to appear
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (homePage.isLocationPermissionDenyButtonVisible()) {
+            String actualText = homePage.getLocationPermissionDenyText().trim();
+            String expectedText = ExcelUtils.getExpectedText("LocationPermissionDenyText").trim();
+
+            System.out.println("🔍 Actual Button Text: " + actualText);
+            System.out.println("📖 Expected Button Text: " + expectedText);
+
+            Assert.assertEquals(actualText, expectedText, "❌ Location permission button text mismatch!");
+
+            homePage.clickLocationPermissionDenyButton();
+            System.out.println("✅ Location permission popup denied successfully.");
+        } else {
+            System.out.println("ℹ️ Location deny button not visible. Tapping top of screen as fallback.");
+            homePage.tapTopOfScreen();  // fallback tap
+            String actualText = homePage.getLocationPermissionDenyText().trim();
+            System.out.println(actualText);
+        }
+    }
+
+
+
+
+
+    @Test(dependsOnMethods = "verifyAndHandleLocationPermissionPopup")
     public void verifyLocationTexts() {
         HomePage homePage = new HomePage(driver);
         homePage.waitForHomePageToLoad();
@@ -27,7 +61,12 @@ public class HomePageTest extends BaseTest {
         System.out.println("✅ Full location text matched: " + actualFull);
     }
 
-    @Test
+
+
+
+
+
+    @Test(dependsOnMethods = "verifyLocationTexts")
     public void verifyHomePageByWalletText() {
         HomePage homePage = new HomePage(driver);
         homePage.waitForHomePageToLoad();
@@ -40,7 +79,7 @@ public class HomePageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(dependsOnMethods = "verifyHomePageByWalletText")
     public void getLetsGoBannerText() {
         HomePage homePage = new HomePage(driver);
 
@@ -52,7 +91,7 @@ public class HomePageTest extends BaseTest {
         System.out.println("✅ How App Works banner text matched: " + actual);
     }
 
-    @Test
+    @Test(dependsOnMethods = "getLetsGoBannerText")
     public void clickHowAppWorksBannerAndVerifyPopupOpened() {
         HomePage homePage = new HomePage(driver);
         HowAppWorksPopupPage popupPage = new HowAppWorksPopupPage(driver);

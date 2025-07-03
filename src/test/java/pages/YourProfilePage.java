@@ -5,6 +5,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidTouchAction;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
@@ -13,11 +14,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ExcelUtils;
 
 import java.time.Duration;
+import java.time.Instant;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
 public class YourProfilePage {
     private final AppiumDriver driver;
+
+    //private final WebDriverWait wait;
 
     private final By yourProfileText = By.xpath("//android.widget.TextView[@text='Your Profile']");
     private final By appearanceOption = By.xpath("//android.view.ViewGroup[@content-desc='Appearance']");
@@ -37,7 +41,14 @@ public class YourProfilePage {
     private final By darkOption = By.xpath("//android.widget.TextView[@text='Dark']");
 
     // Close icon for the Appearance popup
-    private final By appearancePopupCloseIcon = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[3]/com.horcrux.svg.SvgView");
+    //private final By appearancePopupCloseIcon = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[3]/com.horcrux.svg.SvgView");
+    private final By appearancePopupCloseIcon = By.xpath(
+            "//android.widget.FrameLayout[@resource-id='android:id/content']" +
+                    "/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[3]" +
+                    "/com.horcrux.svg.SvgView"
+    );
 
 
     private final By languageOption = By.xpath("//android.view.ViewGroup[@content-desc='Language']");
@@ -49,7 +60,26 @@ public class YourProfilePage {
     private final By englishAUOption = By.xpath("//android.widget.TextView[@text='English (AU)']");
     private final By frenchOption = By.xpath("//android.widget.TextView[@text='Le français']");
 
-    private final By languagePopupCloseIcon = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    //private final By languagePopupCloseIcon = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    private final By languagePopupCloseIcon = By.xpath(
+            "//android.widget.FrameLayout[@resource-id='android:id/content']" +
+                    "/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]" +
+                    "/com.horcrux.svg.SvgView"
+    );
+
+    //private final By feedbackDescription = By.xpath("//android.widget.TextView[@text=\"We are super serious about your feedback! Tell us everything.\"]");
+
+
+    private final By feedbackDescription = By.xpath("//android.widget.TextView[@text=\"We are super serious about your feedback! Tell us everything.\"]");
+
+    private final By feedbackPopupCloseIcon = By.xpath(
+            "//android.widget.FrameLayout[@resource-id='android:id/content']" +
+                    "/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup" +
+                    "/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup[2]"
+    );
 
 
     public YourProfilePage(AppiumDriver driver) {
@@ -180,6 +210,21 @@ public class YourProfilePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(feedbackPopupTitle)).getText();
     }
+
+
+    public void clickFeedbackPopupCloseIcon() {
+        try {
+            driver.findElement(feedbackPopupCloseIcon).click();
+            System.out.println("✅ Clicked on Feedback Close Icon");
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not click Feedback Close Icon: " + e.getMessage());
+        }
+    }
+
+    public boolean isPopupClosed() {
+        return driver.findElements(feedbackDescription).isEmpty();
+    }
+
 
 }
 

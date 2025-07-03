@@ -32,7 +32,7 @@ public class HowAppWorksPopupTest extends BaseTest {
         System.out.println("✅ Step 1 title matched: " + actual);
     }
 
-    @Test(dependsOnMethods = "openPopupByClickingBanner")
+    @Test(dependsOnMethods = "verifyStep1Title")
     public void verifyStep1DescriptionTitle() {
         String expected = ExcelUtils.getExpectedText("Step1DescTitle");
         String actual = popupPage.getStep1DescriptionTitleText();
@@ -40,17 +40,30 @@ public class HowAppWorksPopupTest extends BaseTest {
         Assert.assertEquals(actual, expected, "❌ Step 1 description title mismatch!");
         System.out.println("✅ Step 1 description title matched: " + actual);
     }
+//
+//    @Test(dependsOnMethods = "verifyStep1Title")
+//    public void verifyStep1DescriptionDetail() {
+//        String expected = ExcelUtils.getExpectedText("Step1DescDetail");
+//        String actual = popupPage.getStep1DescriptionDetailText();
+//
+//        Assert.assertEquals(actual, expected, "❌ Step 1 description detail mismatch!");
+//        System.out.println("✅ Step 1 description detail matched: " + actual);
+//    }
 
-    @Test(dependsOnMethods = "openPopupByClickingBanner")
+
+    @Test(dependsOnMethods = "verifyStep1Title")
     public void verifyStep1DescriptionDetail() {
-        String expected = ExcelUtils.getExpectedText("Step1DescDetail");
-        String actual = popupPage.getStep1DescriptionDetailText();
+        String expected = ExcelUtils.getExpectedText("Step1DescDetail").trim();
+        String actual = popupPage.getStep1DescriptionDetailText().trim();
+
+        System.out.println("🔍 Actual Text: " + actual);
+        System.out.println("📖 Expected Text: " + expected);
 
         Assert.assertEquals(actual, expected, "❌ Step 1 description detail mismatch!");
-        System.out.println("✅ Step 1 description detail matched: " + actual);
+        System.out.println("✅ Step 1 description detail matched.");
     }
 
-    @Test(dependsOnMethods = "openPopupByClickingBanner")
+    @Test(dependsOnMethods = "verifyStep1Title")
     public void verifyStep1DotIsVisible() {
         Assert.assertTrue(popupPage.isStep1DotVisible(), "❌ Step 1 dot is not visible.");
         System.out.println("✅ Step 1 dot is visible.");

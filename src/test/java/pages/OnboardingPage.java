@@ -142,8 +142,8 @@ public class OnboardingPage {
         int height = driver.manage().window().getSize().getHeight();
         int width = driver.manage().window().getSize().getWidth();
 
-        int startX = (int) (width * 0.999);
-        int endX = (int) (width * 0.001);
+        int startX = (int) (width * 0.9);
+        int endX = (int) (width * 0.1);
         int y = height / 2;
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
@@ -161,8 +161,8 @@ public class OnboardingPage {
         int height = driver.manage().window().getSize().getHeight();
         int width = driver.manage().window().getSize().getWidth();
 
-        int startX = (int) (width * 0.001);
-        int endX = (int) (width * 0.999);
+        int startX = (int) (width * 0.1);
+        int endX = (int) (width * 0.9);
         int y = height / 2;
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");

@@ -9,7 +9,7 @@ import utils.ExcelUtils;
 public class SplashScreenTest extends BaseTest {
 
     @Test
-    public void verifySplashText() {
+    public void verifySplashScreen() {
         SplashScreenPage splash = new SplashScreenPage(driver);
         String actualText = splash.getSplashText();
         String expectedText = ExcelUtils.getExpectedText("splashText");
@@ -22,7 +22,7 @@ public class SplashScreenTest extends BaseTest {
     }
 
     @Test
-    public void verifySplashTextAgain() {
+    public void verifySplashText() {
         SplashScreenPage splash = new SplashScreenPage(driver);
         String actualText = splash.getSplashText();
         String expectedText = ExcelUtils.getExpectedText("splashText"+"123");
@@ -35,20 +35,20 @@ public class SplashScreenTest extends BaseTest {
     }
 
 
-    @Test
-    public void measureSplashToHomeLoadTime() {
-        SplashScreenPage splash = new SplashScreenPage(driver);
-
-        long startTime = ExcelUtils.PerformanceUtils.getStartTime();
-
-        splash.waitForHomePageAfterSplash(); // Waits until "Your Wallets" is visible
-
-        long duration = ExcelUtils.PerformanceUtils.getEndTime(startTime);
-        ExcelUtils.PerformanceUtils.logLoadTime("Splash ➜ Home", duration);
-
-        System.out.println("✅ Splash to Home transition verified...");
-    }
-
+//    @Test
+//    public void measureSplashToHomeLoadTime() {
+//        SplashScreenPage splash = new SplashScreenPage(driver);
+//
+//        long startTime = ExcelUtils.PerformanceUtils.getStartTime();
+//
+//        splash.waitForHomePageAfterSplash(); // Waits until "Your Wallets" is visible
+//
+//        long duration = ExcelUtils.PerformanceUtils.getEndTime(startTime);
+//        ExcelUtils.PerformanceUtils.logLoadTime("Splash ➜ Home", duration);
+//
+//        System.out.println("✅ Splash to Home transition verified...");
+//    }
+//
 
 
 

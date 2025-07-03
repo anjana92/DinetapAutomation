@@ -30,6 +30,9 @@ public class BaseTest {
         caps.setCapability("appium:appPackage", "com.dinetap.app.qa");
         caps.setCapability("appium:appActivity", "com.dinetap.app.MainActivity");
         caps.setCapability("appium:noReset", true);
+        //caps.setCapability("appium.autoGrantPermissions", false);
+        //caps.setCapability("appium.appWaitActivity", "*");
+
 
         URL appiumServerUrl = new URL("http://127.0.0.1:4723/wd/hub");
         driver = new AndroidDriver(appiumServerUrl, caps);
