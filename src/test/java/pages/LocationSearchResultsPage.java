@@ -49,10 +49,24 @@ public class LocationSearchResultsPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
+//    public void enterSearchTerm(String term) {
+//        driver.findElement(searchBox).clear();
+//        driver.findElement(searchBox).sendKeys(term);
+//    }
+
     public void enterSearchTerm(String term) {
-        driver.findElement(searchBox).clear();
-        driver.findElement(searchBox).sendKeys(term);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wait until the search box is visible
+        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox));
+
+        input.clear();
+        input.sendKeys(term);
     }
+
+
+
+
 
     public boolean isMallsSectionPresent() {
         return !driver.findElements(mallsSection).isEmpty();
@@ -110,11 +124,22 @@ public class LocationSearchResultsPage {
         element.click();
     }
 
+//    public void clickFilteredLocationByExactText(String addressText) {
+//        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//android.widget.TextView[@text='" + addressText + "']")));
+//        element.click();
+//    }
+
+
     public void clickFilteredLocationByExactText(String addressText) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//android.widget.TextView[@text='" + addressText + "']")));
+                By.xpath("//android.widget.TextView[contains(@text,'" + addressText + "')]")
+        ));
         element.click();
     }
+
+
 
     public void enterSearchTermUsingPlaceholder(String term) {
         WebElement searchBoxElement = wait.until(

@@ -21,7 +21,7 @@ public class HomePage {
     private By yourWallets = By.xpath("//android.widget.TextView[@text='Your Wallets']");
     private By howAppWorksBanner = By.xpath("//*[contains(@text,'Click! Learn how the app works')]");
     private By letsGoBanner = By.xpath("//*[contains(@text, \"Let's Go\")]");
-    private By shortLocation2 = By.xpath("//android.widget.TextView[contains(@text, 'Nike Unite Store')]");
+    private By shortLocation2 = By.xpath("//android.widget.TextView[contains(@text, 'Marina Bay')]");
     private final By profileIcon = By.xpath(
             "//android.widget.FrameLayout[@resource-id='android:id/content']" +
                     "/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup" +

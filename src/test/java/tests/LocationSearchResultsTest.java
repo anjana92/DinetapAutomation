@@ -22,6 +22,15 @@ public class LocationSearchResultsTest extends BaseTest {
     public void enterSearchTerm() {
         searchPage = new LocationSearchResultsPage(driver);
 
+        HomePage homePage = new HomePage(driver);
+
+        //tap on short location while in the home page
+        homePage.clickShortLocation();
+        System.out.println("👉 Clicked on short location.");
+
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+
         searchTerm = ExcelUtils.getExpectedText("LocationSearchTerm1");
         Assert.assertNotNull(searchTerm, "❌ Search term missing in Excel for key: LocationSearchTerm1");
 
