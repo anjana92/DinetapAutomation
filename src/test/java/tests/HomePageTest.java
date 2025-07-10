@@ -79,7 +79,75 @@ public class HomePageTest extends BaseTest {
     }
 
 
+//    @Test(dependsOnMethods = "verifyHomePageByWalletText")
+//    public void getLetsGoBannerText() {
+//        HomePage homePage = new HomePage(driver);
+//
+//        String actual = homePage.getLetsGoBannerText();
+//        String expected = ExcelUtils.getExpectedText("HowAppWorksBanner");
+//
+//
+//        Assert.assertEquals(actual, expected, "❌ How App Works banner text mismatch!");
+//        System.out.println("✅ How App Works banner text matched: " + actual);
+//    }
+
+
+
+
+
+
     @Test(dependsOnMethods = "verifyHomePageByWalletText")
+    public void verifyNavigationToWalletTab() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickWalletTab();
+
+        String actual = homePage.getWalletText();
+        String expected = ExcelUtils.getExpectedText("WalletTabText");
+
+        Assert.assertEquals(actual, expected, "❌ 'Your Wallets' tab text mismatch!");
+        System.out.println("✅ Navigated to 'Your Wallets' tab successfully. Text matched: " + actual);
+    }
+
+    @Test(dependsOnMethods = "verifyNavigationToWalletTab")
+    public void verifyNavigationToQRScanTab() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickPermissionsTab();  // QR scan functionality is tied to this tab as per your mapping
+
+        String actual = homePage.getPermissionsText();
+        String expected = ExcelUtils.getExpectedText("QRScanTabText");
+
+        Assert.assertEquals(actual, expected, "❌ 'QR Scan' tab text mismatch!");
+        System.out.println("✅ Navigated to 'QR Scan' tab successfully. Text matched: " + actual);
+    }
+
+    @Test(dependsOnMethods = "verifyNavigationToQRScanTab")
+    public void verifyNavigationToActivityTab() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickActivityTab();
+
+        String actual = homePage.getActivityText();
+        String expected = ExcelUtils.getExpectedText("ActivityTabText");
+
+        Assert.assertEquals(actual, expected, "❌ 'Activity' tab text mismatch!");
+        System.out.println("✅ Navigated to 'Activity' tab successfully. Text matched: " + actual);
+    }
+
+    @Test(dependsOnMethods = "verifyNavigationToActivityTab")
+    public void verifyNavigationToHomeTab() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickHomeTab();
+
+        String actual = homePage.getYourWalletsText();
+        String expected = ExcelUtils.getExpectedText("YourWallets");
+
+        Assert.assertEquals(actual, expected, "❌ Home tab text mismatch ('Your Wallets')!");
+        System.out.println("✅ Navigated to Home tab successfully. Text matched: " + actual);
+    }
+
+
+
+
+    @Test(dependsOnMethods = "verifyNavigationToHomeTab")
     public void getLetsGoBannerText() {
         HomePage homePage = new HomePage(driver);
 
@@ -91,7 +159,8 @@ public class HomePageTest extends BaseTest {
         System.out.println("✅ How App Works banner text matched: " + actual);
     }
 
-    @Test(dependsOnMethods = "getLetsGoBannerText")
+
+    @Test(dependsOnMethods = "verifyNavigationToHomeTab")
     public void clickHowAppWorksBannerAndVerifyPopupOpened() {
         HomePage homePage = new HomePage(driver);
         HowAppWorksPopupPage popupPage = new HowAppWorksPopupPage(driver);

@@ -35,6 +35,21 @@ public class HomePage {
     private final By locationPermissionDenyButton = By.xpath("//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_deny_button']");
 
 
+    // Tab XPaths
+    private final By homeTab = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[1]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    private final By walletTab = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[2]/com.horcrux.svg.SvgView");
+    private final By permissionsTab = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[3]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView");
+    private final By activityTab = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[4]/com.horcrux.svg.SvgView/com.horcrux.svg.GroupView/com.horcrux.svg.PathView[2]");
+    private final By profileTab = By.xpath("//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.View[5]");
+
+    // Text elements to validate navigation
+    private final By walletText = By.xpath("//android.widget.TextView[@text='Your Wallets']");
+    private final By permissionsText = By.xpath("//android.widget.TextView[@text='Grant permissions']");
+    private final By activityText = By.xpath("//android.widget.TextView[@text='Activity']");
+
+
+
+
     public HomePage(AppiumDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -196,5 +211,35 @@ public class HomePage {
 
         driver.perform(List.of(tap));
     }
+
+
+    // Click methods
+    public void clickHomeTab() { wait.until(ExpectedConditions.elementToBeClickable(homeTab)).click(); }
+    public void clickWalletTab() { wait.until(ExpectedConditions.elementToBeClickable(walletTab)).click(); }
+    public void clickPermissionsTab() { wait.until(ExpectedConditions.elementToBeClickable(permissionsTab)).click(); }
+    public void clickActivityTab() { wait.until(ExpectedConditions.elementToBeClickable(activityTab)).click(); }
+    public void clickProfileTab() { wait.until(ExpectedConditions.elementToBeClickable(profileTab)).click(); }
+
+
+
+    // Text getter methods
+    public String getWalletText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(walletText)).getText();
+    }
+    public String getPermissionsText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(permissionsText)).getText();
+    }
+    public String getActivityText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(activityText)).getText();
+    }
+//    public String getHomeText() {
+//        return wait.until(ExpectedConditions.visibilityOfElementLocated(homeText)).getText();
+//    }
+//    public String getProfileText() {
+//        return wait.until(ExpectedConditions.visibilityOfElementLocated(profileText)).getText();
+//    }
+
+
+
 
 }
