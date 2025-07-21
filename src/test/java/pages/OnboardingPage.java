@@ -24,7 +24,7 @@ public class OnboardingPage {
 
     // --- Screen 1 ---
     By screen1Title = By.xpath("//android.widget.TextView[contains(@text, 'Prepay any amount')]");
-    By screen1Description = By.xpath("//android.widget.TextView[contains(@text, 'Prepay to restaurant-specific wallets')]");
+    By screen1Description = By.xpath("//android.widget.TextView[contains(@text, 'Prepay to restaurant specific wallets')]");
     By screen1Arrow = By.xpath("//android.view.ViewGroup[@content-desc='Get Started']");
 
     // --- Screen 2 ---
@@ -34,7 +34,7 @@ public class OnboardingPage {
 
     // --- Screen 3 ---
     By screen3Title = By.xpath("//android.widget.TextView[contains(@text, 'Settle bills')]");
-    By screen3Description = By.xpath("//android.widget.TextView[contains(@text, 'Enter the bill amount, select how much')]");
+    By screen3Description = By.xpath("//android.widget.TextView[contains(@text, 'Put the bill amount, select how much')]");
     By screen3Arrow = screen1Arrow;
 
     // --- Screen 4 ---
